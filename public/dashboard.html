@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <button id="signOut">sign out </button>
+    <div id="disp"></div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+        import {getAuth, onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+    
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyC2uJDw7HGrebPEyDCPz5eBFZhcLgp0UVA",
+          authDomain: "goog-d82ea.firebaseapp.com",
+          projectId: "goog-d82ea",
+          storageBucket: "goog-d82ea.appspot.com",
+          messagingSenderId: "979179403540",
+          appId: "1:979179403540:web:79497784130b8e341aaa01"
+        };
+        const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+  if (user) {
+     console.log(user)
+   
+  } else {
+   window.location.href="index.html"
+  }
+});
+document.getElementById("signOut").addEventListener("click",()=>{
+  signOut(auth)
+  .then(() => {
+  console.log("sign out successful")
+disp.innerHTML=`
+<h1>
+  sign out successfully
+  </h1>`
+  window.location.href="index.html"
+}).catch((err) => {
+  console.log("an error occured")
+})
+})
+        </script>
+</body>
+</html>
